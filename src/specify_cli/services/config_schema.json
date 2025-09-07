@@ -1,0 +1,139 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OpenCode Spec-Kit Configuration Schema",
+  "description": "JSON schema for validating spec-kit configuration files",
+
+  "definitions": {
+    "opencodeConfig": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Configuration version"
+        },
+        "theme": {
+          "type": "string",
+          "enum": ["light", "dark", "auto"],
+          "description": "UI theme preference"
+        },
+        "auto_save": {
+          "type": "boolean",
+          "description": "Enable auto-save functionality"
+        },
+        "keyboard_shortcuts": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z0-9_/]+$": {
+              "type": "string",
+              "description": "Keyboard shortcut key combination"
+            }
+          },
+          "description": "Custom keyboard shortcuts"
+        },
+        "extensions": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z0-9_-]+$": {
+              "type": "boolean",
+              "description": "Extension enable/disable flag"
+            }
+          },
+          "description": "Extension settings"
+        },
+        "workspace_settings": {
+          "type": "object",
+          "description": "Global workspace settings"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Configuration creation timestamp"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Configuration last update timestamp"
+        }
+      },
+      "required": ["version"],
+      "additionalProperties": false
+    },
+
+    "projectConfig": {
+      "type": "object",
+      "properties": {
+        "project_path": {
+          "type": "string",
+          "description": "Absolute path to the project directory"
+        },
+        "spec_kit_enabled": {
+          "type": "boolean",
+          "description": "Enable spec-kit for this project"
+        },
+        "default_template": {
+          "type": ["string", "null"],
+          "description": "Default template to use for new specs"
+        },
+        "auto_commit": {
+          "type": "boolean",
+          "description": "Automatically commit changes"
+        },
+        "git_integration": {
+          "type": "boolean",
+          "description": "Enable git integration features"
+        },
+        "research_enabled": {
+          "type": "boolean",
+          "description": "Enable research capabilities"
+        },
+        "custom_settings": {
+          "type": "object",
+          "properties": {
+            "max_tasks_per_spec": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "description": "Maximum tasks per specification"
+            },
+            "default_research_depth": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10,
+              "description": "Default research depth"
+            },
+            "auto_save_interval": {
+              "type": "integer",
+              "minimum": 10,
+              "maximum": 300,
+              "description": "Auto-save interval in seconds"
+            },
+            "backup_enabled": {
+              "type": "boolean",
+              "description": "Enable backup functionality"
+            }
+          },
+          "additionalProperties": true,
+          "description": "Project-specific custom settings"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Project config creation timestamp"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Project config last update timestamp"
+        }
+      },
+      "required": ["project_path"],
+      "additionalProperties": false
+    }
+  },
+
+  "oneOf": [
+    {"$ref": "#/definitions/opencodeConfig"},
+    {"$ref": "#/definitions/projectConfig"}
+  ]
+}

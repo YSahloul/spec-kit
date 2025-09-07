@@ -1,0 +1,16 @@
+{
+  "project_path": "{{PROJECT_PATH}}",
+  "spec_kit_enabled": true,
+  "default_template": "default",
+  "auto_commit": true,
+  "git_integration": true,
+  "research_enabled": true,
+  "custom_settings": {
+    "max_tasks_per_spec": 10,
+    "default_research_depth": 3,
+    "auto_save_interval": 30,
+    "backup_enabled": true
+  },
+  "created_at": "{{CREATED_AT}}",
+  "updated_at": "{{UPDATED_AT}}"
+}
