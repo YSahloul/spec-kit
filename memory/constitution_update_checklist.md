@@ -8,8 +8,8 @@ When amending the constitution (`/memory/constitution.md`), ensure all dependent
 - [ ] `/templates/plan-template.md` - Update Constitution Check section
 - [ ] `/templates/spec-template.md` - Update if requirements/scope affected
 - [ ] `/templates/tasks-template.md` - Update if new task types needed
-- [ ] `/.claude/commands/plan.md` - Update if planning process changes
-- [ ] `/.claude/commands/tasks.md` - Update if task generation affected
+- [ ] `/.claude/command/plan.md` - Update if planning process changes
+- [ ] `/.claude/command/tasks.md` - Update if task generation affected
 - [ ] `/CLAUDE.md` - Update runtime development guidelines
 
 ### Article-specific updates:
@@ -68,7 +68,7 @@ When amending the constitution (`/memory/constitution.md`), ensure all dependent
 ## Common Misses
 
 Watch for these often-forgotten updates:
-- Command documentation (`/commands/*.md`)
+- Command documentation (`/command/*.md`)
 - Checklist items in templates
 - Example code/commands
 - Domain-specific variations (web vs mobile vs CLI)
