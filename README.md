@@ -30,25 +30,20 @@ Spec-Driven Development **flips the script** on traditional software development
 
 ## ⚡ Get started
 
-### 1. Install OpenCode Spec Kit
+### 1. Install Specify
 
-Initialize your project with OpenCode CLI:
+Initialize your project depending on the coding agent you're using:
 
 ```bash
-# Install OpenCode CLI first
-curl -fsSL https://opencode.ai/install | bash
-
-# Then initialize spec-kit
-uvx --from git+https://github.com/github/spec-kit.git opencode-spec init <PROJECT_NAME>
+uvx --from git+https://github.com/YSahloul/spec-kit.git specify init <PROJECT_NAME>
 ```
 
 ### 2. Create the spec
 
-Use the `/spec` command in OpenCode to describe what you want to build. Focus on the **what** and **why**, not the tech stack.
+Use the `/specify` command to describe what you want to build. Focus on the **what** and **why**, not the tech stack.
 
 ```bash
-# In OpenCode CLI
-/spec Build an application that can help me organize my photos in separate photo albums. Albums are grouped by date and can be re-organized by dragging and dropping on the main page. Albums never other nested albums. Within each album, photos are previewed in a tile-like interface.
+/specify Build an application that can help me organize my photos in separate photo albums. Albums are grouped by date and can be re-organized by dragging and dropping on the main page. Albums never other nested albums. Within each album, photos are previewed in a tile-like interface.
 ```
 
 ### 3. Create a technical implementation plan

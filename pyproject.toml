@@ -1,7 +1,7 @@
 [project]
-name = "opencode-spec-kit"
+name = "specify-cli"
 version = "0.0.2"
-description = "OpenCode-exclusive setup tool for Spec-Driven Development"
+description = "Setup tool for Specify spec-driven development projects"
 requires-python = ">=3.11"
 dependencies = [
     "typer",
@@ -9,17 +9,10 @@ dependencies = [
     "httpx",
     "platformdirs",
     "readchar",
-    "jsonschema",
 ]
 
 [project.scripts]
-spec = "specify_cli:main"
-
-[project.optional-dependencies]
-test = [
-    "pytest>=7.0.0",
-    "pytest-mock>=3.0.0",
-]
+specify = "specify_cli:main"
 
 [build-system]
 requires = ["hatchling"]
@@ -27,4 +20,3 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/specify_cli"]
-# Note: Keeping original package name for compatibility
