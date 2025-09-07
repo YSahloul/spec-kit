@@ -564,11 +564,18 @@ def download_and_extract_template(project_path: Path, ai_assistant: str, is_curr
         elif verbose:
             console.print(f"[cyan]Found {len(template_files)} template files[/cyan]")
 
-        # Copy template files to project directory
+        # Copy template files to project directory - everything goes under .opencode/
         for template_file in template_files:
             # Get relative path from templates directory
             rel_path = template_file.relative_to(templates_path)
-            dest_path = project_path / rel_path
+            
+            # Everything goes under .opencode/
+            if rel_path.parts[0] in ('command', 'scripts', 'memory'):
+                # These directories keep their names under .opencode/
+                dest_path = project_path / '.opencode' / rel_path
+            else:
+                # All other files (templates) go in .opencode/templates/
+                dest_path = project_path / '.opencode' / 'templates' / rel_path
 
             # Create parent directories if needed
             dest_path.parent.mkdir(parents=True, exist_ok=True)
@@ -604,10 +611,10 @@ def download_and_extract_template(project_path: Path, ai_assistant: str, is_curr
 
 @app.command()
 def init(
-    project_name: str = typer.Argument(None, help="Name for your new project directory (optional if using --here)"),
+    project_name: str = typer.Argument(None, help="Name for your new project directory (leave empty to initialize in current directory)"),
     ignore_agent_tools: bool = typer.Option(True, "--ignore-agent-tools/--check-agent-tools", help="Skip checks for OpenCode CLI (default: skip)"),
     no_git: bool = typer.Option(False, "--no-git", help="Skip git repository initialization"),
-    here: bool = typer.Option(False, "--here", help="Initialize project in the current directory instead of creating a new one"),
+    here: bool = typer.Option(False, "--here", help="Initialize project in the current directory (deprecated - just use 'specify init')"),
 ):
     """
     Initialize a new OpenCode Spec-Driven Development project.
@@ -621,20 +628,20 @@ def init(
     6. Set up OpenCode spec-driven development commands
 
     Examples:
-        opencode-spec init my-project
-        opencode-spec init my-project --ignore-agent-tools
-        opencode-spec init --here
+        specify init              # Initialize in current directory
+        specify init my-project   # Create new directory 'my-project'
+        specify init --here       # Initialize in current directory (deprecated)
     """
     # Show banner first
     show_banner()
     
+    # If no project name and not using --here, default to current directory
+    if not project_name and not here:
+        here = True
+    
     # Validate arguments
     if here and project_name:
         console.print("[red]Error:[/red] Cannot specify both project name and --here flag")
-        raise typer.Exit(1)
-    
-    if not here and not project_name:
-        console.print("[red]Error:[/red] Must specify either a project name or use --here flag")
         raise typer.Exit(1)
     
     # Determine project directory

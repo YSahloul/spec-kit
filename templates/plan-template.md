@@ -235,4 +235,4 @@ ios/ or android/
 - [ ] Complexity deviations documented
 
 ---
-*Based on Constitution v2.1.1 - See `/memory/constitution.md`*
+*Based on Constitution v2.1.1 - See `/.opencode/memory/constitution.md`*
